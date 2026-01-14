@@ -26,7 +26,21 @@
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('admin.aboutMe') }}" class="nav-link">
+                        <i class="nav-icon fas fa-user-circle"></i>
+                        <p>About Me</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-project-diagram"></i>
+                        <p>Projects</p>
+                    </a>
+                </li>
+
+                {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Members<i class="right fas fa-angle-left"></i></p>
@@ -39,7 +53,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>

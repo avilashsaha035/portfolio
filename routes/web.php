@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminDashboardController;
 
 /*
@@ -28,6 +29,10 @@ Route::middleware('auth')->group(function () {
 // Backend Routes
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::resource('about-me', AboutController::class)->names([
+        'index' => 'admin.aboutMe',
+        'store' => 'admin.store.aboutMe',
+    ]);
 });
 
 

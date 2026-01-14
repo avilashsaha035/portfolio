@@ -1,3 +1,3 @@
 <footer class="main-footer">
-    <strong>© {{ date('Y') }} Club Management System</strong>
+    <strong>© Avilash Saha <sahaavilash5055@gmail.com> | {{ date('Y') }} My Portfolio</strong>
 </footer>
