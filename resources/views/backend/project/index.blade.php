@@ -7,7 +7,14 @@
 @section('content')
     <div class="card card-info">
         <div class="card-header">
-            <h3><i class="fas fa-cogs"></i> My Projects</h3>
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0"><i class="fas fa-cogs"></i> My Projects</h3>
+                </div>
+                <div class="col-auto">
+                    <a href="{{ route('admin.project.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i> Create</a>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <table id="projectsTable" class="table table-bordered table-striped">
