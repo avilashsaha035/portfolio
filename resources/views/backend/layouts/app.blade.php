@@ -14,6 +14,9 @@
         <!-- AdminLTE CSS -->
         <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/adminlte.min.css') }}">
 
+        <!-- Toastr CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
         <!-- summernote -->
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs5.min.css" rel="stylesheet">
 
@@ -61,6 +64,34 @@
 
         <!-- AdminLTE JS -->
         <script src="{{ asset('assets/backend/dist/js/adminlte.min.js') }}"></script>
+
+        <!-- Toastr JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "timeOut": "3000"
+            };
+
+            @if(session('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if(session('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
+
+            @if(session('warning'))
+                toastr.warning("{{ session('warning') }}");
+            @endif
+
+            @if(session('info'))
+                toastr.info("{{ session('info') }}");
+            @endif
+        </script>
+
 
         <!-- Summernote -->
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs5.min.js"></script>

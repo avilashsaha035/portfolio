@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\AboutMe;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
-class AboutController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $aboutMe = AboutMe::first();
-        return view('backend.about.index', compact('aboutMe'));
+        return view('backend.project.index');
     }
 
     /**
@@ -23,7 +21,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.project.create');
     }
 
     /**
@@ -32,32 +30,28 @@ class AboutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'       => 'nullable|string',
+            'title'       => 'required|string',
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'link'        => 'nullable|url',
+            'repo_link'   => 'nullable|url',
+            'live_link'   => 'nullable|url',
         ]);
 
-        $aboutMe = AboutMe::first() ?? new AboutMe();
-        $aboutMe->title = $request->title;
-        $aboutMe->description = $request->description;
-        $aboutMe->cv_link = $request->link;
+        $project = new Project();
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->repo_link = $request->repo_link;
+        $project->live_link = $request->live_link;
 
         if ($request->hasFile('image')) {
-
-            // delete old image if exists
-            if (!empty($aboutMe->image) && Storage::disk('public')->exists($aboutMe->image)) {
-                Storage::disk('public')->delete($aboutMe->image);
-            }
-
             $originalName = $request->file('image')->getClientOriginalName();
-            $imagePath = $request->file('image')->storeAs('about_me', $originalName, 'public');
-            $aboutMe->image = $imagePath;
+            $imagePath = $request->file('image')->storeAs('project', $originalName, 'public');
+            $project->image = $imagePath;
         }
 
-        $aboutMe->save();
+        $project->save();
 
-        return redirect()->back()->with('success', 'Info saved successfully!');
+        return redirect()->route('admin.project')->with('success', 'Project added successfully!');
     }
 
     /**

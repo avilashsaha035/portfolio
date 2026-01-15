@@ -1,54 +1,59 @@
 @extends('backend.layouts.app')
 
 @push('title')
-    About Me
+    Create Project
 @endpush
 
 @section('content')
     <div class="card card-info">
         <div class="card-header">
-            <h3><i class="fas fa-user-cog"></i> About Me</h3>
+            <h3><i class="fas fa-plus-square"></i> Create Project</h3>
         </div>
 
-        <form action="{{ route('admin.aboutMe.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $aboutMe->title ?? '') }}" required>
+                    <input type="text" name="title" id="title" class="form-control" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="description" id="description" class="">{{ old('description', $aboutMe->description ?? '') }}</textarea>
+                    <textarea name="description" id="description" class=""></textarea>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="image" class="form-label">Profile Image</label>
+                    <label for="image" class="form-label">Project Thumbnail</label>
 
                     <div class="border rounded p-3">
                         <input type="file" name="image" id="image" class="form-control mb-2" accept="image/*">
 
-                        <div class="d-flex align-items-center">
-                            <img id="imagePreview" src="{{ !empty($aboutMe->image) ? asset('storage/'.$aboutMe->image) : '' }}" class="rounded"
-                                style="width:120px; height:120px; object-fit:cover; border:1px solid black; display: {{ !empty($aboutMe->image) ? 'block' : 'none' }};">
+                        <div class="d-flex align-items-center gap-3">
+                            <img id="imagePreview" class="rounded" style="width:120px; height:120px; object-fit:cover; display:none;">
 
-                            <button type="button" id="removeImage" class="btn btn-sm btn-danger ml-1" style="display: {{ !empty($aboutMe->image) ? 'inline-block' : 'none' }};">
+                            <button type="button" id="removeImage" class="btn btn-sm btn-danger" style="display:none;">
                                 <i class="fas fa-trash"></i> Remove
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="link" class="form-label">CV Link</label>
-                    <input type="url" name="link" id="link" class="form-control"
-                        value="{{ old('link', $aboutMe->cv_link ?? '') }}">
+                <div class="row">
+                    <div class="form-group col-6 mb-3">
+                        <label for="repo_link" class="form-label">Repository Link</label>
+                        <input type="url" name="repo_link" id="repo_link" class="form-control">
+                    </div>
+
+                    <div class="form-group col-6 mb-3">
+                        <label for="live_link" class="form-label">Live Link</label>
+                        <input type="url" name="live_link" id="live_link" class="form-control">
+                    </div>
                 </div>
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-success float-end"><i class="fas fa-save"></i> Save</button>
+                <button type="submit" class="btn btn-success float-end"><i class="fas fa-plus-square"></i> Create</button>
             </div>
         </form>
     </div>
@@ -57,17 +62,16 @@
 @push('script')
     <script>
         $(document).ready(function () {
+            // summernote
             $('#description').summernote({
                 height: 200,
                 placeholder: 'Write description here...',
             });
-        });
-    </script>
 
-    <script>
-        $(document).ready(function () {
+            // image preview container
             $('#image').on('change', function () {
                 const file = this.files[0];
+
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
