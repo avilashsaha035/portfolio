@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('backend.project.index');
+        $projects = Project::get();
+        return view('backend.project.index', compact('projects'));
     }
 
     /**
@@ -67,7 +69,8 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('backend.project.edit', compact('project'));
     }
 
     /**
@@ -75,7 +78,36 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title'       => 'required|string',
+            'description' => 'nullable|string',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'repo_link'   => 'nullable|url',
+            'live_link'   => 'nullable|url',
+        ]);
+
+        $project = Project::findOrFail($id);
+
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->repo_link = $request->repo_link;
+        $project->live_link = $request->live_link;
+
+        if ($request->hasFile('image')) {
+
+            // delete old image if exists
+            if (!empty($project->image) && Storage::disk('public')->exists($project->image)) {
+                Storage::disk('public')->delete($project->image);
+            }
+
+            $originalName = $request->file('image')->getClientOriginalName();
+            $imagePath = $request->file('image')->storeAs('project', $originalName, 'public');
+            $project->image = $imagePath;
+        }
+
+        $project->save();
+
+        return redirect()->route('admin.project')->with('success', 'Project updated successfully!');
     }
 
     /**
@@ -83,6 +115,15 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        // delete image from storage if exists
+        if (!empty($project->image) && Storage::disk('public')->exists($project->image)) {
+            Storage::disk('public')->delete($project->image);
+        }
+
+        $project->delete();
+
+        return redirect()->route('admin.project')->with('success', 'Project deleted successfully!');
     }
 }

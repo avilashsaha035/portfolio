@@ -14,6 +14,9 @@
         <!-- AdminLTE CSS -->
         <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/adminlte.min.css') }}">
 
+        <!-- jquery Datatable -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
+
         <!-- Toastr CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
@@ -64,6 +67,13 @@
 
         <!-- AdminLTE JS -->
         <script src="{{ asset('assets/backend/dist/js/adminlte.min.js') }}"></script>
+
+        <!-- jquery Datatable -->
+        <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Toastr JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
