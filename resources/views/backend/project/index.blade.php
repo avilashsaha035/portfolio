@@ -12,7 +12,7 @@
                     <h3 class="mb-0"><i class="fas fa-cogs"></i> My Projects</h3>
                 </div>
                 <div class="col-auto">
-                    <a href="{{ route('admin.project.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i> Create</a>
+                    <a href="{{ route('admin.project.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Create</a>
                 </div>
             </div>
         </div>
