@@ -13,9 +13,15 @@
         <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-                <div class="form-group mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" id="title" class="form-control" required>
+                <div class="row">
+                    <div class="form-group col-6 mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" required>
+                    </div>
+                    <div class="form-group col-6 mb-3">
+                        <label for="project_type" class="form-label">Project Type</label>
+                        <input type="text" name="project_type" id="project_type" class="form-control" placeholder="e.g. Full-Stack / E-commerce / AI/ML /..." required>
+                    </div>
                 </div>
 
                 <div class="form-group mb-3">

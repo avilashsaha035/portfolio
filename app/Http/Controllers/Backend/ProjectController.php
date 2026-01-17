@@ -32,18 +32,20 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'       => 'required|string',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'repo_link'   => 'nullable|url',
-            'live_link'   => 'nullable|url',
+            'title'        => 'required|string',
+            'project_type' => 'required|string',
+            'description'  => 'nullable|string',
+            'image'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'repo_link'    => 'nullable|url',
+            'live_link'    => 'nullable|url',
         ]);
 
-        $project = new Project();
-        $project->title = $request->title;
-        $project->description = $request->description;
-        $project->repo_link = $request->repo_link;
-        $project->live_link = $request->live_link;
+        $project               = new Project();
+        $project->title        = $request->title;
+        $project->project_type = $request->project_type;
+        $project->description  = strip_tags($request->description);
+        $project->repo_link    = $request->repo_link;
+        $project->live_link    = $request->live_link;
 
         if ($request->hasFile('image')) {
             $originalName = $request->file('image')->getClientOriginalName();
@@ -79,19 +81,21 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title'       => 'required|string',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'repo_link'   => 'nullable|url',
-            'live_link'   => 'nullable|url',
+            'title'        => 'required|string',
+            'project_type' => 'required|string',
+            'description'  => 'nullable|string',
+            'image'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'repo_link'    => 'nullable|url',
+            'live_link'    => 'nullable|url',
         ]);
 
         $project = Project::findOrFail($id);
 
-        $project->title = $request->title;
-        $project->description = $request->description;
-        $project->repo_link = $request->repo_link;
-        $project->live_link = $request->live_link;
+        $project->title        = $request->title;
+        $project->project_type = $request->project_type;
+        $project->description  = strip_tags($request->description);
+        $project->repo_link    = $request->repo_link;
+        $project->live_link    = $request->live_link;
 
         if ($request->hasFile('image')) {
 

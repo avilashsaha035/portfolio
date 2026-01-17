@@ -15,9 +15,15 @@
             @method('PUT')
 
             <div class="card-body">
-                <div class="form-group mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $project->title) }}" required>
+                <div class="row">
+                    <div class="form-group col-6 mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $project->title) }}" required>
+                    </div>
+                    <div class="form-group col-6 mb-3">
+                        <label for="project_type" class="form-label">Project Type</label>
+                        <input type="text" name="project_type" id="project_type" class="form-control" placeholder="e.g. Full-Stack / E-commerce / AI/ML /..." value="{{ old('project_type', $project->project_type) }}" required>
+                    </div>
                 </div>
 
                 <div class="form-group mb-3">

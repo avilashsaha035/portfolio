@@ -22,7 +22,7 @@
                 </div>
 
                 <h1 class="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
-                    Hi, I'm <span class="text-gradient block sm:inline">Alex Morgan</span>
+                    Hi, I'm <span class="text-gradient block sm:inline">Avilash Saha</span>
                 </h1>
 
                 <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray mb-4 md:mb-6 border-r-4 border-primary pr-2 overflow-hidden whitespace-nowrap animate-typing animate-blink-caret">
@@ -35,8 +35,8 @@
 
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#projects" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">View My Work</a>
-                    <a href="#contact" class="border-gradient text-white px-8 py-3 rounded-full font-semibold hover:bg-dark-light transition-all duration-300">Contact Me</a>
+                    <a href="#projects" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"><i class="fa-regular fa-eye mr-2"></i>View My Work</a>
+                    <a href="#contact" class="border-gradient text-white px-8 py-3 rounded-full font-semibold hover:bg-dark-light transition-all duration-300"><i class="fa-solid fa-cloud-arrow-down mr-2"></i>Download CV</a>
                 </div>
 
                 <div class="mt-12 flex items-center space-x-6">
@@ -68,7 +68,7 @@
                     <!-- Profile image container with responsive sizing -->
                     <div class="w-48 h-48 xs:w-56 xs:h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl animate-float mx-auto">
                         <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                        <img src="{{ asset('/storage/'. $aboutMe->image) }}"
                             alt="Alex Morgan"
                             class="w-full h-full object-cover mix-blend-overlay">
                     </div>
@@ -113,11 +113,7 @@
 
             <div class="flex flex-col md:flex-row gap-12">
                 <div class="md:w-1/2 fade-in">
-                    <p class="text-gray text-lg mb-6">I'm a passionate software engineer with over 5 years of experience building web applications and digital solutions. I specialize in creating scalable, maintainable, and user-friendly applications.</p>
-
-                    <p class="text-gray text-lg mb-6">My journey in tech started with a Computer Science degree, followed by roles at both startups and established tech companies. I've worked on everything from e-commerce platforms to AI-powered analytics tools.</p>
-
-                    <p class="text-gray text-lg mb-8">When I'm not coding, you can find me hiking in the mountains, reading tech blogs, or contributing to open-source projects. I believe in continuous learning and staying up-to-date with the latest technologies.</p>
+                    <p class="text-gray text-lg text-justify mb-6">{{ $aboutMe->description }}</p>
 
                     <div class="flex items-center space-x-6">
                         <a href="#" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
@@ -301,242 +297,52 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1: Analytics Dashboard -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                            alt="Analytics Dashboard"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-primary px-3 py-1 rounded-full text-sm font-bold border border-primary/30 z-20">Full Stack</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Analytics Dashboard</h3>
-                            <!-- <p class="text-gray-200 text-sm">Interactive data visualization</p> -->>
+                @foreach ($projects as $project)
+                    <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
+                        <div class="h-48 relative overflow-hidden">
+                            <!-- Image overlay for better text readability -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
+                            <!-- Project Image -->
+                            <img src="{{ asset('/storage/'. $project->image) }}"alt="{{ $project->title }}"
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            <!-- Project Type Badge -->
+                            <div class="absolute top-4 right-4 bg-dark text-primary px-3 py-1 rounded-full text-sm font-bold border border-primary/30 z-20">{{ $project->project_type }}</div>
+                            <!-- Project Title Overlay -->
+                            <div class="absolute bottom-4 left-4 z-20">
+                                <h3 class="text-xl font-bold text-white">{{ $project->title }}</h3>
+                                <!-- <p class="text-gray-200 text-sm">Interactive data visualization</p> -->
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <p class="text-gray mb-4">{{ $project->description }}</p>
+
+                            {{-- <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Node.js</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MongoDB</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">D3.js</span>
+                            </div> --}}
+
+                            <div class="flex justify-between items-center">
+                                @if(!empty($project->live_link))
+                                    <a href="{{ $project->live_link }}" class="text-primary font-medium hover:underline inline-flex items-center">
+                                        Live Preview <i class="fas fa-eye ml-2"></i>
+                                    </a>
+                                @endif
+                                @if(!empty($project->repo_link))
+                                    <a href="{{ $project->repo_link }}" class="text-gray hover:text-primary transition-colors duration-300">
+                                        <i class="fab fa-github text-lg"></i> Github
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">A real-time analytics platform with interactive charts and data visualization tools for business intelligence.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Node.js</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MongoDB</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">D3.js</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: E-commerce Platform -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                            alt="E-commerce Platform"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-secondary px-3 py-1 rounded-full text-sm font-bold border border-secondary/30 z-20">E-commerce</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">E-commerce Platform</h3>
-                            <p class="text-gray-200 text-sm">Online shopping solution</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">A modern e-commerce solution with payment integration, inventory management, and customer analytics.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Vue.js</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Django</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">PostgreSQL</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Stripe</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: AI Content Generator -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                            alt="AI Content Generator"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-accent px-3 py-1 rounded-full text-sm font-bold border border-accent/30 z-20">AI/ML</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">AI Content Generator</h3>
-                            <p class="text-gray-200 text-sm">Smart marketing assistant</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">An AI-powered tool that generates marketing content based on user input, preferences, and brand voice analysis.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Python</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">FastAPI</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">OpenAI API</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: Task Management App -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                            alt="Task Management App"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-primary px-3 py-1 rounded-full text-sm font-bold border border-primary/30 z-20">Productivity</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">TaskFlow</h3>
-                            <p class="text-gray-200 text-sm">Team collaboration tool</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">A collaborative task management application with real-time updates, team assignments, and progress tracking.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Express.js</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Socket.io</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">PostgreSQL</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5: Fitness Tracker -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                            alt="Fitness Tracker"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-secondary px-3 py-1 rounded-full text-sm font-bold border border-secondary/30 z-20">Mobile</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">FitTrack Pro</h3>
-                            <p class="text-gray-200 text-sm">Health & fitness app</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">A comprehensive fitness tracking application with workout plans, nutrition logging, and progress visualization.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React Native</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Node.js</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MongoDB</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Chart.js</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6: Travel Planning App -->
-                <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                    <div class="h-48 relative overflow-hidden">
-                        <!-- Image overlay for better text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                        <!-- Project Image -->
-                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1835&q=80"
-                            alt="Travel Planning App"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <!-- Project Type Badge -->
-                        <div class="absolute top-4 right-4 bg-dark text-accent px-3 py-1 rounded-full text-sm font-bold border border-accent/30 z-20">Travel</div>
-                        <!-- Project Title Overlay -->
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">WanderPlan</h3>
-                            <p class="text-gray-200 text-sm">Travel itinerary planner</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-gray mb-4">An intelligent travel planning application that creates personalized itineraries based on user preferences and budget.</p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Vue.js</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Laravel</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MySQL</span>
-                            <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Google Maps API</span>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
-                                View Project <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <a href="#" class="text-gray hover:text-primary transition-colors duration-300">
-                                <i class="fab fa-github text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="text-center mt-12 fade-in">
-                <a href="#" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
+                <a href="https://github.com/avilashsaha035" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
                     <i class="fab fa-github mr-2"></i> View More on GitHub
                 </a>
             </div>

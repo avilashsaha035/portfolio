@@ -38,10 +38,10 @@ class AboutController extends Controller
             'link'        => 'nullable|url',
         ]);
 
-        $aboutMe = AboutMe::first() ?? new AboutMe();
-        $aboutMe->title = $request->title;
-        $aboutMe->description = $request->description;
-        $aboutMe->cv_link = $request->link;
+        $aboutMe                = AboutMe::first() ?? new AboutMe();
+        $aboutMe->title         = $request->title;
+        $aboutMe->description   = strip_tags($request->description);
+        $aboutMe->cv_link       = $request->link;
 
         if ($request->hasFile('image')) {
 
