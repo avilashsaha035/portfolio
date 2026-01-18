@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $social = $aboutMe->social_links ?? [];
+    @endphp
     <!-- Hero Section -->
     <section id="home" class="hero-shape code-bg pt-20 pb-20 md:pt-32 md:pb-48 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-90"></div>
@@ -25,7 +28,7 @@
                     Hi, I'm <span class="text-gradient block sm:inline">Avilash Saha</span>
                 </h1>
 
-                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray mb-4 md:mb-6 border-r-4 border-primary pr-2 overflow-hidden whitespace-nowrap animate-typing animate-blink-caret">
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray mb-4 md:mb-6 overflow-hidden whitespace-nowrap animate-typing animate-blink-caret">
                     Full Stack Developer & Problem Solver
                 </h2>
 
@@ -36,13 +39,13 @@
 
                 <div class="flex flex-wrap gap-4">
                     <a href="#projects" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"><i class="fa-regular fa-eye mr-2"></i>View My Work</a>
-                    <a href="#contact" class="border-gradient text-white px-8 py-3 rounded-full font-semibold hover:bg-dark-light transition-all duration-300"><i class="fa-solid fa-cloud-arrow-down mr-2"></i>Download CV</a>
+                    <a href="{{ $aboutMe->cv_link}}" target="blank" class="border-gradient text-white px-8 py-3 rounded-full font-semibold hover:bg-dark-light transition-all duration-300"><i class="fa-solid fa-cloud-arrow-down mr-2"></i>Download CV</a>
                 </div>
 
                 <div class="mt-12 flex items-center space-x-6">
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gradient flex items-center justify-center mr-3 animate-pulse-slow">
-                            <i class="fas fa-code text-white"></i>
+                            <i class="fa-solid fa-chess-king fa-lg text-white"></i>
                         </div>
                         <div>
                             <div class="text-2xl font-bold text-white">5+</div>
@@ -52,11 +55,11 @@
 
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gradient flex items-center justify-center mr-3 animate-pulse-slow" style="animation-delay: 0.5s;">
-                            <i class="fas fa-project-diagram text-white"></i>
+                            <i class="fas fa-code text-white"></i>
                         </div>
                         <div>
-                            <div class="text-2xl font-bold text-white">24</div>
-                            <div class="text-gray text-sm">Projects Completed</div>
+                            <div class="text-2xl font-bold text-white">PHP</div>
+                            <div class="text-gray text-sm">Most Used Language</div>
                         </div>
                     </div>
                 </div>
@@ -116,18 +119,26 @@
                     <p class="text-gray text-lg text-justify mb-6">{{ $aboutMe->description }}</p>
 
                     <div class="flex items-center space-x-6">
-                        <a href="#" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                        @if (!empty($social['github']))
+                            <a href="{{ $social['github'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
                             <i class="fab fa-github text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                            <i class="fab fa-linkedin text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                            <i class="fab fa-twitter text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                            <i class="fab fa-dev text-2xl"></i>
-                        </a>
+                        @endif
+                        @if (!empty($social['linkedin']))
+                            <a href="{{ $social['linkedin'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                        @endif
+                        @if (!empty($social['twitter']))
+                            <a href="{{ $social['twitter'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                        @endif
+                        @if (!empty($social['facebook']))
+                            <a href="{{ $social['facebook'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fa-brands fa-facebook text-2xl"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
 
@@ -302,11 +313,10 @@
                         <div class="h-48 relative overflow-hidden">
                             <!-- Image overlay for better text readability -->
                             <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                            <!-- Project Image -->
                             <img src="{{ asset('/storage/'. $project->image) }}"alt="{{ $project->title }}"
                                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
                             <!-- Project Type Badge -->
-                            <div class="absolute top-4 right-4 bg-dark text-primary px-3 py-1 rounded-full text-sm font-bold border border-primary/30 z-20">{{ $project->project_type }}</div>
+                            <div class="absolute top-4 right-4 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-bold border border-accent/30 z-20">{{ $project->project_type }}</div>
                             <!-- Project Title Overlay -->
                             <div class="absolute bottom-4 left-4 z-20">
                                 <h3 class="text-xl font-bold text-white">{{ $project->title }}</h3>
@@ -342,7 +352,7 @@
             </div>
 
             <div class="text-center mt-12 fade-in">
-                <a href="https://github.com/avilashsaha035" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
+                <a href="{{ $social['github'] }}" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
                     <i class="fab fa-github mr-2"></i> View More on GitHub
                 </a>
             </div>
@@ -373,7 +383,7 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-white">Email</div>
-                                        <div class="text-gray">alex@example.com</div>
+                                        <div class="text-gray">sahaavilash5055@gmail.com</div>
                                     </div>
                                 </div>
 
@@ -383,7 +393,7 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-white">Phone</div>
-                                        <div class="text-gray">+1 (123) 456-7890</div>
+                                        <div class="text-gray">+880-1777-020313</div>
                                     </div>
                                 </div>
 
@@ -393,24 +403,32 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-white">Location</div>
-                                        <div class="text-gray">San Francisco, CA</div>
+                                        <div class="text-gray">Dhaka, Bangladesh</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mt-10 flex space-x-4">
-                                <a href="#" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                    <i class="fab fa-dev"></i>
-                                </a>
+                                @if (!empty($social['linkedin']))
+                                    <a href="{{ $social['linkedin'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                @endif
+                                @if (!empty($social['github']))
+                                    <a href="{{ $social['github'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                @endif
+                                @if (!empty($social['twitter']))
+                                    <a href="{{ $social['twitter'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                @endif
+                                @if (!empty($social['facebook']))
+                                    <a href="{{ $social['facebook'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
 

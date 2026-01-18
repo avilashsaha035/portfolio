@@ -39,9 +39,18 @@ class AboutController extends Controller
         ]);
 
         $aboutMe                = AboutMe::first() ?? new AboutMe();
+        // Social Links as JSON Array
+        $socialLinks = [
+            'facebook'   => $request->facebook,
+            'instagram' => $request->instagram,
+            'linkedin'  => $request->linkedin,
+            'twitter'   => $request->twitter,
+            'github'    => $request->github,
+        ];
         $aboutMe->title         = $request->title;
         $aboutMe->description   = strip_tags($request->description);
         $aboutMe->cv_link       = $request->link;
+        $aboutMe->social_links  = $socialLinks;
 
         if ($request->hasFile('image')) {
 

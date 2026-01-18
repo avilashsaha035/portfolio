@@ -40,10 +40,41 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="link" class="form-label">CV Link</label>
-                    <input type="url" name="link" id="link" class="form-control"
-                        value="{{ old('link', $aboutMe->cv_link ?? '') }}">
+                <div class="row">
+                    @php
+                        $social = $aboutMe->social_links ?? [];
+                    @endphp
+
+                    <div class="form-group col-4 mb-3">
+                        <label for="link" class="form-label">CV Link</label>
+                        <input type="url" name="link" id="link" class="form-control"
+                            value="{{ old('link', $aboutMe->cv_link ?? '') }}">
+                    </div>
+                    <div class="form-group col-4 mb-3">
+                        <label for="facebook" class="form-label">Facebook</label>
+                        <input type="url" name="facebook" id="facebook" class="form-control"
+                            value="{{ old('facebook', $social['facebook'] ?? '') }}">
+                    </div>
+                    <div class="form-group col-4 mb-3">
+                        <label for="instagram" class="form-label">Instagram</label>
+                        <input type="url" name="instagram" id="instagram" class="form-control"
+                            value="{{ old('instagram', $social['instagram'] ?? '') }}">
+                    </div>
+                    <div class="form-group col-4 mb-3">
+                        <label for="linkedin" class="form-label">LinkedIn</label>
+                        <input type="url" name="linkedin" id="linkedin" class="form-control"
+                            value="{{ old('linkedin', $social['linkedin'] ?? '') }}">
+                    </div>
+                    <div class="form-group col-4 mb-3">
+                        <label for="twitter" class="form-label">X / Twitter</label>
+                        <input type="url" name="twitter" id="twitter" class="form-control"
+                            value="{{ old('twitter', $social['twitter'] ?? '') }}">
+                    </div>
+                    <div class="form-group col-4 mb-3">
+                        <label for="github" class="form-label">Github</label>
+                        <input type="url" name="github" id="github" class="form-control"
+                            value="{{ old('github', $social['github'] ?? '') }}">
+                    </div>
                 </div>
             </div>
 

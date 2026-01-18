@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="fixed w-full z-50 glass-effect shadow-lg">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl font-bold text-gradient">AM</a>
+        <a href="#" class="text-2xl font-bold text-gradient">AVI</a>
 
         <div class="hidden md:flex space-x-8">
             <a href="#home" class="nav-link text-gray hover:text-primary transition-colors duration-300">Home</a>

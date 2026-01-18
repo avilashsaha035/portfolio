@@ -11,10 +11,14 @@ class AboutMe extends Model
 
     protected $table = 'about_me';
 
+    protected $casts = [
+        'social_links' => 'array',
+    ];
     protected $fillable = [
         'title',
         'description',
         'image',
         'cv_link',
+        'social_links',
     ];
 }
