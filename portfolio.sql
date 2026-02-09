@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2026 at 01:26 PM
+-- Generation Time: Jan 25, 2026 at 06:06 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,7 @@ CREATE TABLE `about_me` (
   `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cv_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social_links` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -41,8 +42,8 @@ CREATE TABLE `about_me` (
 -- Dumping data for table `about_me`
 --
 
-INSERT INTO `about_me` (`id`, `title`, `description`, `image`, `cv_link`, `created_at`, `updated_at`) VALUES
-(1, 'Hi! I am Avilash Saha', 'fsgdfggbfgfh111', 'about_me/passport.jpg', 'https://dev.to/slyfirefox/laravel-modding-generating-models-with-singular-table-names-11h9', '2026-01-14 14:44:21', '2026-01-15 02:44:31');
+INSERT INTO `about_me` (`id`, `title`, `description`, `image`, `cv_link`, `social_links`, `created_at`, `updated_at`) VALUES
+(1, 'Hi! I am Avilash Saha', 'I\'m a passionate software engineer with over 5 years of experience building web applications and digital solutions. I specialize in creating scalable, maintainable, and user-friendly applications. My journey in tech started with a Computer Science degree, followed by roles at both startups and established tech companies. I\'ve worked on everything from e-commerce platforms to AI-powered analytics tools. When I\'m not coding, you can find me hiking in the mountains, reading tech blogs, or contributing to open-source projects. I believe in continuous learning and staying up-to-date with the latest technologies.', 'about_me/avilash_saha.png', 'https://drive.google.com/file/d/1_TJR9XdXU2RXLe09Nac6rbtJuyQa0SfJ/view?usp=sharing', '{\"facebook\":\"https:\\/\\/www.facebook.com\\/avilashsaha.akash\",\"instagram\":null,\"linkedin\":\"https:\\/\\/www.linkedin.com\\/in\\/avilashsaha035\\/\",\"twitter\":null,\"github\":\"https:\\/\\/github.com\\/avilashsaha035\"}', '2026-01-14 14:44:21', '2026-01-18 01:28:33');
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2026_01_14_194957_create_about_me_table', 2),
 (6, '2026_01_15_072948_create_projects_table', 3),
-(7, '2026_01_17_122407_add_project_type_to_projects_table', 4);
+(7, '2026_01_17_122407_add_project_type_to_projects_table', 4),
+(9, '2026_01_18_064527_add_social_links_to_about_me_table', 5);
 
 -- --------------------------------------------------------
 
@@ -139,7 +141,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `title`, `description`, `image`, `repo_link`, `live_link`, `created_at`, `updated_at`, `project_type`) VALUES
-(4, 'AK Tech', '<p><span style=\"font-family: Poppins, sans-serif; font-size: 14px; text-align: justify;\"><font color=\"#ffffff\">It is a single page responsive webpage. It is about a gadgets and web solutions company.</font></span></p>', NULL, 'https://github.com/avilashsaha035/AK-Tech.github.io', 'https://avilashsaha035.github.io/AK-Tech.github.io/', '2026-01-15 13:51:12', '2026-01-15 13:56:27', NULL);
+(4, 'AK Tech', 'It\'s a simple webpage made by html,css,bootstrap and js.', 'project/Screenshot_1 (1).png', 'https://github.com/avilashsaha035/AK-Tech.github.io', 'https://avilashsaha035.github.io/AK-Tech.github.io/', '2026-01-15 13:51:12', '2026-01-17 07:40:02', 'portfolio');
 
 -- --------------------------------------------------------
 
@@ -235,7 +237,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
