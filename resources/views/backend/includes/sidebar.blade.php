@@ -2,7 +2,7 @@
 
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-        <span class="brand-text font-weight-light">Club Management</span>
+        <span class="brand-text font-weight-light">Avilash's Portfolio</span>
     </a>
 
     <!-- Sidebar -->
