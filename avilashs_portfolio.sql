@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 25, 2026 at 06:06 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Mar 30, 2026 at 05:58 AM
+-- Server version: 11.4.10-MariaDB
+-- PHP Version: 8.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `portfolio`
+-- Database: `avilashs_portfolio`
 --
 
 -- --------------------------------------------------------
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `about_me` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cv_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `social_links` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `cv_link` varchar(255) DEFAULT NULL,
+  `social_links` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,7 +43,7 @@ CREATE TABLE `about_me` (
 --
 
 INSERT INTO `about_me` (`id`, `title`, `description`, `image`, `cv_link`, `social_links`, `created_at`, `updated_at`) VALUES
-(1, 'Hi! I am Avilash Saha', 'I\'m a passionate software engineer with over 5 years of experience building web applications and digital solutions. I specialize in creating scalable, maintainable, and user-friendly applications. My journey in tech started with a Computer Science degree, followed by roles at both startups and established tech companies. I\'ve worked on everything from e-commerce platforms to AI-powered analytics tools. When I\'m not coding, you can find me hiking in the mountains, reading tech blogs, or contributing to open-source projects. I believe in continuous learning and staying up-to-date with the latest technologies.', 'about_me/avilash_saha.png', 'https://drive.google.com/file/d/1_TJR9XdXU2RXLe09Nac6rbtJuyQa0SfJ/view?usp=sharing', '{\"facebook\":\"https:\\/\\/www.facebook.com\\/avilashsaha.akash\",\"instagram\":null,\"linkedin\":\"https:\\/\\/www.linkedin.com\\/in\\/avilashsaha035\\/\",\"twitter\":null,\"github\":\"https:\\/\\/github.com\\/avilashsaha035\"}', '2026-01-14 14:44:21', '2026-01-18 01:28:33');
+(1, 'Hi! I am Avilash Saha', 'I\'m a passionate software engineer with over 5 years of experience building web applications and digital solutions. I specialize in creating scalable, maintainable, and user-friendly applications. My journey in tech started with a Computer Science degree, followed by roles at both startups and established tech companies. I\'ve worked on everything from e-commerce platforms to AI-powered analytics tools. When I\'m not coding, you can find me hiking in the mountains, reading tech blogs, or contributing to open-source projects. I believe in continuous learning and staying up-to-date with the latest technologies.', 'about_me/avilash_saha.png', 'https://drive.google.com/file/d/1_gWr658ingHqN0Jr-O2Vu4LglyENa2hJ/view?usp=sharing', '{\"facebook\":\"https:\\/\\/www.facebook.com\\/avilashsaha.akash\",\"instagram\":null,\"linkedin\":\"https:\\/\\/www.linkedin.com\\/in\\/avilashsaha035\\/\",\"twitter\":null,\"github\":\"https:\\/\\/github.com\\/avilashsaha035\"}', '2026-01-14 14:44:21', '2026-03-17 11:49:40');
 
 -- --------------------------------------------------------
 
@@ -53,11 +53,11 @@ INSERT INTO `about_me` (`id`, `title`, `description`, `image`, `cv_link`, `socia
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -69,7 +69,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -94,8 +94,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -107,11 +107,11 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -126,14 +126,14 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `projects` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `repo_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `live_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `repo_link` varchar(255) DEFAULT NULL,
+  `live_link` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `project_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `project_type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -141,7 +141,9 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `title`, `description`, `image`, `repo_link`, `live_link`, `created_at`, `updated_at`, `project_type`) VALUES
-(4, 'AK Tech', 'It\'s a simple webpage made by html,css,bootstrap and js.', 'project/Screenshot_1 (1).png', 'https://github.com/avilashsaha035/AK-Tech.github.io', 'https://avilashsaha035.github.io/AK-Tech.github.io/', '2026-01-15 13:51:12', '2026-01-17 07:40:02', 'portfolio');
+(5, 'QuizVerse', 'QuizVerse is an interactive online MCQ examination system that allows users to take multiple-choice quizzes, receive instant results, and track their performance. It’s designed for students, educators, and organizations to conduct exams easily with real-time evaluation and a clean user experience.', 'project/Screenshot 2026-01-26 211729.png', 'https://github.com/avilashsaha035/QuizVerse', NULL, '2026-01-26 15:20:14', '2026-01-26 15:20:14', 'Online MCQ'),
+(6, 'Online News Portal', 'This is a news portal website with admin dashboard and role base authentication control. Here admin/moderator can upload the news from admin panel.&nbsp;This project is developed with PHP, Laravel, MySQl, HTML, CSS, JavaScript, jQuery, Ajax.', 'project/Screenshot_75.png', 'https://github.com/avilashsaha035/news_portal', NULL, '2026-02-09 20:38:01', '2026-02-09 20:38:01', 'News Portal'),
+(7, 'Tube Downloader', 'A simple YouTube video downloader built with Python. It provides a clean web interface where users can paste a YouTube link, preview the video thumbnail and title, choose the desired quality (1080p, 720p, 480p, or best available), and download the video directly to their machine.', 'project/Screenshot_5.png', 'https://github.com/avilashsaha035/youtubeVideoDownloader', 'https://youtubevideodownloader-production.up.railway.app/', '2026-02-09 20:43:17', '2026-02-09 20:43:17', 'Video Downloader');
 
 -- --------------------------------------------------------
 
@@ -151,11 +153,11 @@ INSERT INTO `projects` (`id`, `title`, `description`, `image`, `repo_link`, `liv
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -249,7 +251,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

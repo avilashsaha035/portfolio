@@ -193,56 +193,38 @@
                 <div class="fade-in">
                     <h3 class="text-2xl font-bold mb-8 text-white">Technical Skills</h3>
 
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-white">JavaScript/TypeScript</span>
-                                <span class="font-bold text-primary">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="95"></div>
-                            </div>
-                        </div>
+                    @php
+                        $skills = [
+                            ['name' => 'HTML',        'color' => '#E34F26', 'bg' => 'rgba(227,79,38,0.12)',   'border' => 'rgba(227,79,38,0.3)'],
+                            ['name' => 'CSS',         'color' => '#1572B6', 'bg' => 'rgba(21,114,182,0.12)',  'border' => 'rgba(21,114,182,0.3)'],
+                            ['name' => 'Bootstrap',   'color' => '#7952B3', 'bg' => 'rgba(121,82,179,0.12)', 'border' => 'rgba(121,82,179,0.3)'],
+                            ['name' => 'Tailwind',    'color' => '#38BDF8', 'bg' => 'rgba(56,189,248,0.12)',  'border' => 'rgba(56,189,248,0.3)'],
+                            ['name' => 'JavaScript',  'color' => '#F7DF1E', 'bg' => 'rgba(247,223,30,0.12)',  'border' => 'rgba(247,223,30,0.3)'],
+                            ['name' => 'jQuery',      'color' => '#0769AD', 'bg' => 'rgba(7,105,173,0.12)',   'border' => 'rgba(7,105,173,0.3)'],
+                            ['name' => 'Vue.js',      'color' => '#42B883', 'bg' => 'rgba(66,184,131,0.12)',  'border' => 'rgba(66,184,131,0.3)'],
+                            ['name' => 'Node.js',     'color' => '#8CC84B', 'bg' => 'rgba(140,200,75,0.12)',  'border' => 'rgba(140,200,75,0.3)'],
+                            ['name' => 'Express.js',  'color' => '#AAAAAA', 'bg' => 'rgba(170,170,170,0.12)', 'border' => 'rgba(170,170,170,0.3)'],
+                            ['name' => 'PHP',         'color' => '#777BB4', 'bg' => 'rgba(119,123,180,0.12)', 'border' => 'rgba(119,123,180,0.3)'],
+                            ['name' => 'Laravel',     'color' => '#FF2D20', 'bg' => 'rgba(255,45,32,0.12)',   'border' => 'rgba(255,45,32,0.3)'],
+                            ['name' => 'MySQL',       'color' => '#00758F', 'bg' => 'rgba(0,117,143,0.12)',   'border' => 'rgba(0,117,143,0.3)'],
+                            ['name' => 'Python',      'color' => '#3776AB', 'bg' => 'rgba(55,118,171,0.12)',  'border' => 'rgba(55,118,171,0.3)'],
+                        ];
+                    @endphp
 
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-white">React & Vue.js</span>
-                                <span class="font-bold text-primary">90%</span>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($skills as $skill)
+                            <div
+                                class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default"
+                                style="
+                                    color: {{ $skill['color'] }};
+                                    background-color: {{ $skill['bg'] }};
+                                    border: 1px solid {{ $skill['border'] }};
+                                "
+                            >
+                                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color: {{ $skill['color'] }};"></span>
+                                {{ $skill['name'] }}
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-white">Node.js & Express</span>
-                                <span class="font-bold text-primary">88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="88"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-white">Python & Django</span>
-                                <span class="font-bold text-primary">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-white">AWS & DevOps</span>
-                                <span class="font-bold text-primary">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
