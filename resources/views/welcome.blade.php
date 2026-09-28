@@ -116,19 +116,10 @@
         <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 fade-in">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium bg-primary/10 text-primary border border-primary/30 mb-4">
-                    <i class="fa-solid fa-briefcase"></i>
-                    <span>Career Roadmap &amp; Experience</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-                    Work <span class="text-gradient">Experience</span>
-                </h2>
-            </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">Work Experience</h2>
 
-            <div class="relative max-w-4xl mx-auto">
+            <div class="relative max-w-5xl mx-auto mt-4">
                 <!-- Timeline Stem Track -->
                 <div class="timeline-track"></div>
 
