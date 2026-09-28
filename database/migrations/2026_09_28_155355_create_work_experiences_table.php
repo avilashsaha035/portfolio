@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date')->nullable();
             $table->text('description')->nullable();
-            $table->json('achievements')->nullable();
+            $table->longText('achievements')->nullable();
             $table->json('tech_stack')->nullable();
             $table->unsignedTinyInteger('sort_order')->default(0);
             $table->timestamps();

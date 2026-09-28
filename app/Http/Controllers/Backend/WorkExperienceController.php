@@ -27,8 +27,8 @@ class WorkExperienceController extends Controller
             'employment_type' => 'required|string',
             'workplace_type'  => 'required|string',
             'location'        => 'nullable|string|max:255',
-            'start_date'      => 'required|string|max:50',
-            'end_date'        => 'nullable|string|max:50',
+            'start_date'      => 'required|date',
+            'end_date'        => 'nullable|date',
             'description'     => 'nullable|string',
             'achievements'    => 'nullable|string',
             'tech_stack'      => 'nullable|string',
@@ -55,8 +55,8 @@ class WorkExperienceController extends Controller
             'employment_type' => 'required|string',
             'workplace_type'  => 'required|string',
             'location'        => 'nullable|string|max:255',
-            'start_date'      => 'required|string|max:50',
-            'end_date'        => 'nullable|string|max:50',
+            'start_date'      => 'required|date',
+            'end_date'        => 'nullable|date',
             'description'     => 'nullable|string',
             'achievements'    => 'nullable|string',
             'tech_stack'      => 'nullable|string',
@@ -78,20 +78,15 @@ class WorkExperienceController extends Controller
     }
 
     /**
-     * Convert raw form strings into arrays for JSON columns.
-     * Achievements: one bullet per line. Tech stack: comma-separated tags.
+     * Prepare form data for storage.
+     * Tech stack: comma-separated tags parsed to array.
+     * Achievements: rich HTML from Summernote.
      */
     private function prepareData(array $data): array
     {
-        $data['achievements'] = $this->parseLines($data['achievements'] ?? '');
+        $data['achievements'] = $data['achievements'] ?? null;
         $data['tech_stack']   = $this->parseCsv($data['tech_stack'] ?? '');
         return $data;
-    }
-
-    private function parseLines(?string $text): array
-    {
-        if (empty($text)) return [];
-        return array_values(array_filter(array_map('trim', explode("\n", $text))));
     }
 
     private function parseCsv(?string $text): array

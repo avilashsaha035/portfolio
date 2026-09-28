@@ -200,16 +200,22 @@
                                             <i class="fa-solid fa-trophy text-accent text-xs"></i>
                                             Key Impact &amp; Contributions
                                         </h4>
-                                        <ul class="space-y-2.5">
-                                            @foreach ($exp->achievements as $item)
-                                                <li class="flex items-start text-sm md:text-base text-gray leading-relaxed">
-                                                    <span class="text-primary mt-1 mr-3 flex-shrink-0">
-                                                        <i class="fa-solid fa-circle-check text-xs"></i>
-                                                    </span>
-                                                    <span>{{ $item }}</span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                        <div class="experience-achievements text-gray text-sm md:text-base leading-relaxed">
+                                            @if (is_array($exp->achievements))
+                                                <ul class="space-y-2.5">
+                                                    @foreach ($exp->achievements as $item)
+                                                        <li class="flex items-start text-sm md:text-base text-gray leading-relaxed">
+                                                            <span class="text-primary mt-1 mr-3 flex-shrink-0">
+                                                                <i class="fa-solid fa-circle-check text-xs"></i>
+                                                            </span>
+                                                            <span>{{ $item }}</span>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                {!! $exp->achievements !!}
+                                            @endif
+                                        </div>
                                     </div>
                                 @endif
 

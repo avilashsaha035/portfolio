@@ -56,20 +56,32 @@
                     </div>
                 </div>
 
-                {{-- Row 3: Start & End Date --}}
+                {{-- Row 3: Start Date, Checkbox, End Date, Sort Order --}}
                 <div class="row">
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-3 mb-3">
                         <label for="start_date" class="form-label">Start Date <span class="text-danger">*</span></label>
-                        <input type="text" name="start_date" id="start_date" class="form-control @error('start_date') is-invalid @enderror"
-                               value="{{ old('start_date', $experience->start_date) }}" required>
+                        <input type="date" name="start_date" id="start_date" class="form-control @error('start_date') is-invalid @enderror"
+                               value="{{ old('start_date', $experience->formatted_start_date) }}" required>
                         @error('start_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
-                    <div class="form-group col-md-4 mb-3">
-                        <label for="end_date" class="form-label">End Date <small class="text-muted">(leave blank = Present)</small></label>
-                        <input type="text" name="end_date" id="end_date" class="form-control"
-                               value="{{ old('end_date', $experience->end_date) }}">
+                    <div class="form-group col-md-3 mb-3">
+                        <label class="form-label d-block">Status</label>
+                        <div class="form-check pt-2">
+                            <input type="checkbox" id="is_current" class="form-check-input"
+                                   {{ empty(old('end_date', $experience->end_date)) ? 'checked' : '' }}>
+                            <label for="is_current" class="form-check-label">
+                                Currently working here
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="end_date" class="form-label">End Date <small class="text-muted">(leave blank = Present)</small></label>
+                        <input type="date" name="end_date" id="end_date" class="form-control @error('end_date') is-invalid @enderror"
+                               value="{{ old('end_date', $experience->formatted_end_date) }}"
+                               {{ empty(old('end_date', $experience->end_date)) ? 'disabled' : '' }}>
+                        @error('end_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
                         <label for="sort_order" class="form-label">Sort Order <small class="text-muted">(0 = top)</small></label>
                         <input type="number" name="sort_order" id="sort_order" class="form-control"
                                value="{{ old('sort_order', $experience->sort_order) }}" min="0">
@@ -84,8 +96,9 @@
 
                 {{-- Achievements --}}
                 <div class="form-group mb-3">
-                    <label for="achievements" class="form-label">Key Achievements <small class="text-muted">(one per line)</small></label>
-                    <textarea name="achievements" id="achievements" class="form-control" rows="5">{{ old('achievements', implode("\n", $experience->achievements ?? [])) }}</textarea>
+                    <label for="achievements" class="form-label">Key Achievements</label>
+                    <textarea name="achievements" id="achievements" class="form-control" rows="5">{{ old('achievements', is_array($experience->achievements) ? implode("\n", $experience->achievements) : $experience->achievements) }}</textarea>
+                    @error('achievements') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
                 {{-- Tech Stack --}}
@@ -108,3 +121,23 @@
         </form>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            // summernote
+            $('#achievements').summernote({
+                height: 200,
+                placeholder: 'Write key achievements and contributions...',
+            });
+
+            $('#is_current').on('change', function () {
+                const isChecked = $(this).is(':checked');
+                $('#end_date').prop('disabled', isChecked);
+                if (isChecked) {
+                    $('#end_date').val('');
+                }
+            });
+        });
+    </script>
+@endpush
