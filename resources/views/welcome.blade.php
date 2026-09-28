@@ -109,6 +109,7 @@
         </div>
     </section>
 
+    @if ($experiences->isNotEmpty())
     <!-- Work Experience Section -->
     <section id="experience" class="py-20 bg-dark relative overflow-hidden">
         <!-- Ambient background glows -->
@@ -237,6 +238,7 @@
             </div>
         </div>
     </section>
+    @endif
 
 
     <!-- Projects Section -->
