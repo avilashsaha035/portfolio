@@ -289,76 +289,60 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-dark-light">
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark-light">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">About Me</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">My Projects</h2>
 
-            <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-1/2 fade-in">
-                    <p class="text-gray text-lg text-justify mb-6">{{ $aboutMe->description }}</p>
-
-                    <div class="flex items-center space-x-6">
-                        @if (!empty($social['github']))
-                            <a href="{{ $social['github'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                            <i class="fab fa-github text-2xl"></i>
-                        </a>
-                        @endif
-                        @if (!empty($social['linkedin']))
-                            <a href="{{ $social['linkedin'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                                <i class="fab fa-linkedin text-2xl"></i>
-                            </a>
-                        @endif
-                        @if (!empty($social['twitter']))
-                            <a href="{{ $social['twitter'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                                <i class="fab fa-twitter text-2xl"></i>
-                            </a>
-                        @endif
-                        @if (!empty($social['facebook']))
-                            <a href="{{ $social['facebook'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
-                                <i class="fa-brands fa-facebook text-2xl"></i>
-                            </a>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="md:w-1/2 fade-in">
-                    <div class="glass-effect p-8 rounded-3xl shadow-xl">
-                        <h3 class="text-2xl font-bold mb-6 text-white">My Approach</h3>
-
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="bg-gradient text-white p-3 rounded-full mr-4">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-white mb-1">Clean & Efficient Code</h4>
-                                    <p class="text-gray">Writing maintainable, well-documented code that follows best practices and design patterns.</p>
-                                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Analytics Dashboard -->
+                @foreach ($projects as $project)
+                    <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
+                        <div class="h-48 relative overflow-hidden">
+                            <!-- Image overlay for better text readability -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
+                            <img src="{{ asset('/storage/'. $project->image) }}"alt="{{ $project->title }}"
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            <!-- Project Type Badge -->
+                            <div class="absolute top-4 right-4 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-bold border border-accent/30 z-20">{{ $project->project_type }}</div>
+                            <!-- Project Title Overlay -->
+                            <div class="absolute bottom-4 left-4 z-20">
+                                <h3 class="text-xl font-bold text-white">{{ $project->title }}</h3>
+                                <!-- <p class="text-gray-200 text-sm">Interactive data visualization</p> -->
                             </div>
+                        </div>
 
-                            <div class="flex items-start">
-                                <div class="bg-gradient-accent text-white p-3 rounded-full mr-4">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-white mb-1">Problem Solving</h4>
-                                    <p class="text-gray">Breaking down complex problems into manageable pieces and finding innovative solutions.</p>
-                                </div>
-                            </div>
+                        <div class="p-6">
+                            <p class="text-gray mb-4">{{ $project->description }}</p>
 
-                            <div class="flex items-start">
-                                <div class="bg-gradient text-white p-3 rounded-full mr-4">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-white mb-1">Collaboration</h4>
-                                    <p class="text-gray">Working effectively in teams, communicating clearly, and mentoring junior developers.</p>
-                                </div>
+                            {{-- <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Node.js</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MongoDB</span>
+                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">D3.js</span>
+                            </div> --}}
+
+                            <div class="flex justify-between items-center">
+                                @if(!empty($project->live_link))
+                                    <a href="{{ $project->live_link }}" class="text-primary font-medium hover:underline inline-flex items-center">
+                                        Live Preview <i class="fas fa-eye ml-2"></i>
+                                    </a>
+                                @endif
+                                @if(!empty($project->repo_link))
+                                    <a href="{{ $project->repo_link }}" class="text-gray hover:text-primary transition-colors duration-300">
+                                        <i class="fab fa-github text-lg"></i> Github
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+            </div>
+
+            <div class="text-center mt-12 fade-in">
+                <a href="{{ $social['github'] }}" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
+                    <i class="fab fa-github mr-2"></i> View More on GitHub
+                </a>
             </div>
         </div>
     </section>
@@ -463,60 +447,76 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-dark-light">
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark-light">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">My Projects</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">About Me</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: Analytics Dashboard -->
-                @foreach ($projects as $project)
-                    <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
-                        <div class="h-48 relative overflow-hidden">
-                            <!-- Image overlay for better text readability -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
-                            <img src="{{ asset('/storage/'. $project->image) }}"alt="{{ $project->title }}"
-                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <!-- Project Type Badge -->
-                            <div class="absolute top-4 right-4 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-bold border border-accent/30 z-20">{{ $project->project_type }}</div>
-                            <!-- Project Title Overlay -->
-                            <div class="absolute bottom-4 left-4 z-20">
-                                <h3 class="text-xl font-bold text-white">{{ $project->title }}</h3>
-                                <!-- <p class="text-gray-200 text-sm">Interactive data visualization</p> -->
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2 fade-in">
+                    <p class="text-gray text-lg text-justify mb-6">{{ $aboutMe->description }}</p>
+
+                    <div class="flex items-center space-x-6">
+                        @if (!empty($social['github']))
+                            <a href="{{ $social['github'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        @endif
+                        @if (!empty($social['linkedin']))
+                            <a href="{{ $social['linkedin'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                        @endif
+                        @if (!empty($social['twitter']))
+                            <a href="{{ $social['twitter'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                        @endif
+                        @if (!empty($social['facebook']))
+                            <a href="{{ $social['facebook'] }}" class="text-gray hover:text-primary transition-colors duration-300 hover:scale-110 transform">
+                                <i class="fa-brands fa-facebook text-2xl"></i>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 fade-in">
+                    <div class="glass-effect p-8 rounded-3xl shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6 text-white">My Approach</h3>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-gradient text-white p-3 rounded-full mr-4">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Clean & Efficient Code</h4>
+                                    <p class="text-gray">Writing maintainable, well-documented code that follows best practices and design patterns.</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="p-6">
-                            <p class="text-gray mb-4">{{ $project->description }}</p>
+                            <div class="flex items-start">
+                                <div class="bg-gradient-accent text-white p-3 rounded-full mr-4">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Problem Solving</h4>
+                                    <p class="text-gray">Breaking down complex problems into manageable pieces and finding innovative solutions.</p>
+                                </div>
+                            </div>
 
-                            {{-- <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
-                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">Node.js</span>
-                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">MongoDB</span>
-                                <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">D3.js</span>
-                            </div> --}}
-
-                            <div class="flex justify-between items-center">
-                                @if(!empty($project->live_link))
-                                    <a href="{{ $project->live_link }}" class="text-primary font-medium hover:underline inline-flex items-center">
-                                        Live Preview <i class="fas fa-eye ml-2"></i>
-                                    </a>
-                                @endif
-                                @if(!empty($project->repo_link))
-                                    <a href="{{ $project->repo_link }}" class="text-gray hover:text-primary transition-colors duration-300">
-                                        <i class="fab fa-github text-lg"></i> Github
-                                    </a>
-                                @endif
+                            <div class="flex items-start">
+                                <div class="bg-gradient text-white p-3 rounded-full mr-4">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Collaboration</h4>
+                                    <p class="text-gray">Working effectively in teams, communicating clearly, and mentoring junior developers.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-            <div class="text-center mt-12 fade-in">
-                <a href="{{ $social['github'] }}" class="bg-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 inline-flex items-center">
-                    <i class="fab fa-github mr-2"></i> View More on GitHub
-                </a>
+                </div>
             </div>
         </div>
     </section>

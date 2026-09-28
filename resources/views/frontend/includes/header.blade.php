@@ -6,9 +6,9 @@
         <div class="hidden md:flex space-x-8">
             <a href="#home" class="nav-link text-gray hover:text-primary transition-colors duration-300">Home</a>
             <a href="#experience" class="nav-link text-gray hover:text-primary transition-colors duration-300">Experience</a>
-            <a href="#about" class="nav-link text-gray hover:text-primary transition-colors duration-300">About</a>
-            <a href="#skills" class="nav-link text-gray hover:text-primary transition-colors duration-300">Skills</a>
             <a href="#projects" class="nav-link text-gray hover:text-primary transition-colors duration-300">Projects</a>
+            <a href="#skills" class="nav-link text-gray hover:text-primary transition-colors duration-300">Skills</a>
+            <a href="#about" class="nav-link text-gray hover:text-primary transition-colors duration-300">About</a>
             <a href="#contact" class="nav-link text-gray hover:text-primary transition-colors duration-300">Contact</a>
         </div>
 
@@ -25,9 +25,9 @@
         <div class="flex flex-col space-y-4">
             <a href="#home" class="nav-link text-gray hover:text-primary transition-colors duration-300">Home</a>
             <a href="#experience" class="nav-link text-gray hover:text-primary transition-colors duration-300">Experience</a>
-            <a href="#about" class="nav-link text-gray hover:text-primary transition-colors duration-300">About</a>
-            <a href="#skills" class="nav-link text-gray hover:text-primary transition-colors duration-300">Skills</a>
             <a href="#projects" class="nav-link text-gray hover:text-primary transition-colors duration-300">Projects</a>
+            <a href="#skills" class="nav-link text-gray hover:text-primary transition-colors duration-300">Skills</a>
+            <a href="#about" class="nav-link text-gray hover:text-primary transition-colors duration-300">About</a>
             <a href="#contact" class="nav-link text-gray hover:text-primary transition-colors duration-300">Contact</a>
         </div>
     </div>
