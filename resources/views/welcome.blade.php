@@ -109,6 +109,186 @@
         </div>
     </section>
 
+    <!-- Work Experience Section -->
+    <section id="experience" class="py-20 bg-dark relative overflow-hidden">
+        <!-- Ambient background glows -->
+        <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 fade-in">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium bg-primary/10 text-primary border border-primary/30 mb-4">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Career Roadmap &amp; Experience</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    Work <span class="text-gradient">Experience</span>
+                </h2>
+            </div>
+
+            <!-- Experience Timeline -->
+            @php
+                $workExperiences = [
+                    [
+                        'role' => 'Senior Software Engineer',
+                        'company' => 'OptiScale Systems',
+                        'employment_type' => 'Full-time',
+                        'workplace_type' => 'Remote',
+                        'location' => 'Remote · Global Clients',
+                        'period' => '2023 — Present',
+                        'duration' => 'Current Role',
+                        'is_current' => true,
+                        'description' => 'Leading backend architectural decisions, designing robust RESTful APIs, and optimizing cloud data pipelines for high-traffic enterprise applications.',
+                        'achievements' => [
+                            'Architected high-throughput REST APIs & modular backend services with Laravel & PHP 8+, reducing mean latency from 420ms to 180ms (<span class="text-secondary font-semibold">57% performance gain</span>).',
+                            'Engineered background queues and multi-layer caching with Redis & MySQL, sustaining <span class="text-white font-semibold">100k+ daily transactions</span> at 99.9% uptime.',
+                            'Automated CI/CD deployment pipelines using Docker containerization, reducing production release turnarounds by <span class="text-secondary font-semibold">45%</span> with zero downtime.',
+                            'Integrated global payment gateways (Stripe, PayPal) with idempotent webhook processing, transactional safety, and fraud prevention.'
+                        ],
+                        'tech_stack' => ['PHP 8+', 'Laravel', 'MySQL', 'Redis', 'Docker', 'RESTful APIs', 'Vue.js', 'Tailwind CSS', 'AWS', 'Git']
+                    ],
+                    [
+                        'role' => 'Software Engineer',
+                        'company' => 'AlphaCore Technologies',
+                        'employment_type' => 'Full-time',
+                        'workplace_type' => 'Hybrid',
+                        'location' => 'Dhaka, Bangladesh',
+                        'period' => '2021 — 2023',
+                        'duration' => '2 yrs',
+                        'is_current' => false,
+                        'description' => 'Developed scalable enterprise management platforms, CRM systems, and optimized database queries for mission-critical client workflows.',
+                        'achievements' => [
+                            'Refactored relational schemas, indexes, and complex MySQL aggregation queries, boosting analytical report generation speed by <span class="text-secondary font-semibold">3.5x</span>.',
+                            'Engineered granular Role-Based Access Control (RBAC) and OAuth/JWT session management for secure multi-tenant portals.',
+                            'Built interactive, responsive dashboards using Tailwind CSS and JavaScript, elevating user retention and task completion scores by <span class="text-secondary font-semibold">28%</span>.',
+                            'Collaborated with cross-functional Agile/Scrum teams and international product managers to consistently ship sprint milestones ahead of schedule.'
+                        ],
+                        'tech_stack' => ['Laravel', 'PHP', 'JavaScript', 'MySQL', 'Tailwind CSS', 'Bootstrap', 'Git', 'Postman', 'Agile/Scrum']
+                    ],
+                    [
+                        'role' => 'Junior Software Developer',
+                        'company' => 'CodeCrafters Lab',
+                        'employment_type' => 'Full-time',
+                        'workplace_type' => 'On-site',
+                        'location' => 'Dhaka, Bangladesh',
+                        'period' => '2019 — 2021',
+                        'duration' => '2 yrs',
+                        'is_current' => false,
+                        'description' => 'Built bespoke client web solutions, custom CMS plugins, and reusable front-to-back application components following clean code standards.',
+                        'achievements' => [
+                            'Delivered <span class="text-white font-semibold">10+ production-ready web applications</span> adhering strictly to MVC architecture and PSR code standards.',
+                            'Translated complex Figma & Adobe XD wireframes into pixel-perfect, responsive interfaces across all major desktop and mobile viewports.',
+                            'Integrated third-party APIs and authored comprehensive technical documentation, reducing regression bugs by <span class="text-secondary font-semibold">30%</span>.'
+                        ],
+                        'tech_stack' => ['PHP', 'MySQL', 'JavaScript', 'jQuery', 'HTML5 / CSS3', 'Ajax', 'GitHub']
+                    ]
+                ];
+            @endphp
+
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Timeline Stem Track -->
+                <div class="timeline-track"></div>
+
+                <div class="space-y-12">
+                    @foreach ($workExperiences as $exp)
+                        <div class="relative pl-12 md:pl-20 fade-in group">
+                            <!-- Timeline Node -->
+                            <div class="absolute left-0 top-1.5 md:top-2 w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-dark-light border-2 {{ $exp['is_current'] ? 'border-secondary shadow-lg shadow-secondary/30' : 'border-primary/40 group-hover:border-primary' }} flex items-center justify-center transition-all duration-300 z-10">
+                                @if ($exp['is_current'])
+                                    <span class="relative flex h-3.5 w-3.5">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-secondary"></span>
+                                    </span>
+                                @else
+                                    <i class="fa-solid fa-code text-primary text-sm md:text-base group-hover:scale-110 transition-transform"></i>
+                                @endif
+                            </div>
+
+                            <!-- Experience Card -->
+                            <div class="bg-dark-light/80 p-6 md:p-8 rounded-2xl border border-dark-lighter hover:border-primary/40 transition-all duration-300 card-hover shadow-xl">
+                                <!-- Card Header -->
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-4 border-b border-dark-lighter/60">
+                                    <div>
+                                        <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                                            <h3 class="text-xl md:text-2xl font-bold text-white">
+                                                {{ $exp['role'] }}
+                                            </h3>
+                                            @if ($exp['is_current'])
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-secondary/15 text-secondary border border-secondary/30">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Present
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="flex flex-wrap items-center gap-3 text-sm">
+                                            <span class="text-gradient font-semibold text-base">{{ $exp['company'] }}</span>
+                                            <span class="text-dark-lighter">•</span>
+                                            <span class="text-gray flex items-center gap-1">
+                                                <i class="fa-solid fa-location-dot text-xs text-primary"></i> {{ $exp['location'] }}
+                                            </span>
+                                            <span class="text-dark-lighter">•</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-dark text-gray border border-dark-lighter">
+                                                {{ $exp['workplace_type'] }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="md:text-right flex-shrink-0">
+                                        <div class="text-white font-medium text-sm md:text-base flex items-center md:justify-end gap-1.5">
+                                            <i class="fa-regular fa-calendar text-accent"></i>
+                                            {{ $exp['period'] }}
+                                        </div>
+                                        <div class="text-gray text-xs mt-0.5">
+                                            {{ $exp['duration'] }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Role Scope Description -->
+                                <p class="text-gray text-sm md:text-base mb-6 leading-relaxed">
+                                    {{ $exp['description'] }}
+                                </p>
+
+                                <!-- Key Achievements -->
+                                <div class="mb-6">
+                                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gray mb-3 flex items-center gap-2">
+                                        <i class="fa-solid fa-trophy text-accent text-xs"></i>
+                                        Key Impact &amp; Contributions
+                                    </h4>
+                                    <ul class="space-y-2.5">
+                                        @foreach ($exp['achievements'] as $item)
+                                            <li class="flex items-start text-sm md:text-base text-gray leading-relaxed">
+                                                <span class="text-primary mt-1 mr-3 flex-shrink-0">
+                                                    <i class="fa-solid fa-circle-check text-xs"></i>
+                                                </span>
+                                                <span>{!! $item !!}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                                <!-- Tech Stack -->
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gray mb-2.5 flex items-center gap-2">
+                                        <i class="fa-solid fa-microchip text-primary text-xs"></i>
+                                        Technologies &amp; Tools
+                                    </h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach ($exp['tech_stack'] as $tech)
+                                            <span class="bg-dark text-gray hover:text-white px-3 py-1 rounded-lg text-xs font-mono border border-dark-lighter transition-colors duration-200">
+                                                {{ $tech }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="py-20 bg-dark-light">
         <div class="container mx-auto px-6">

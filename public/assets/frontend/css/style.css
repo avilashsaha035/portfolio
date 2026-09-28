@@ -102,3 +102,19 @@
         radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 20%),
         radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 20%);
 }
+
+/* Work Experience Timeline Track */
+.timeline-track {
+    position: absolute;
+    left: 1.25rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    background: linear-gradient(180deg, #8B5CF6 0%, #10B981 60%, rgba(51, 65, 85, 0.3) 100%);
+}
+
+@media (min-width: 768px) {
+    .timeline-track {
+        left: 1.75rem;
+    }
+}
