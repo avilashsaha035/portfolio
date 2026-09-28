@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\WorkExperienceController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\AdminDashboardController;
 
@@ -46,6 +47,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'edit'    => 'admin.project.edit',
         'update'  => 'admin.project.update',
         'destroy' => 'admin.project.destroy',
+    ]);
+
+    // Work Experience
+    Route::resource('work-experience', WorkExperienceController::class)->except('show')->names([
+        'index'   => 'admin.work-experience.index',
+        'create'  => 'admin.work-experience.create',
+        'store'   => 'admin.work-experience.store',
+        'edit'    => 'admin.work-experience.edit',
+        'update'  => 'admin.work-experience.update',
+        'destroy' => 'admin.work-experience.destroy',
     ]);
 });
 
