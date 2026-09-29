@@ -55,29 +55,26 @@ jobs:
       # 1. Sync backend application files to /home/USERNAME/portfolio/
       - name: Deploy Backend to cPanel (portfolio folder)
         run: |
-          rsync -avz --delete \
+          tar -czf - \
             --exclude='.git*' \
             --exclude='.env' \
             --exclude='.env.*' \
-            --exclude='storage/' \
-            --exclude='node_modules/' \
-            --exclude='tests/' \
+            --exclude='storage' \
+            --exclude='node_modules' \
+            --exclude='tests' \
             --exclude='phpunit.xml' \
-            -e "ssh -p ${{ secrets.CPANEL_SSH_PORT || 22 }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            ./ ${{ secrets.CPANEL_SSH_USER }}@${{ secrets.CPANEL_SSH_HOST }}:/home/${{ secrets.CPANEL_SSH_USER }}/portfolio/
+            . | ssh -p ${{ secrets.CPANEL_SSH_PORT || 22 }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.CPANEL_SSH_USER }}@${{ secrets.CPANEL_SSH_HOST }} "mkdir -p /home/${{ secrets.CPANEL_SSH_USER }}/portfolio && tar -xzf - -C /home/${{ secrets.CPANEL_SSH_USER }}/portfolio"
 
       # 2. Sync public assets (Vite build, images, styles) directly to public_html
       # Safely preserves index.php, .htaccess, .well-known, and the storage symlink
       - name: Deploy Public Assets to public_html
         run: |
-          rsync -avz \
+          tar -czf - \
             --exclude='index.php' \
             --exclude='.htaccess' \
-            --exclude='.well-known/' \
-            --exclude='storage/' \
+            --exclude='.well-known' \
             --exclude='storage' \
-            -e "ssh -p ${{ secrets.CPANEL_SSH_PORT || 22 }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            ./public/ ${{ secrets.CPANEL_SSH_USER }}@${{ secrets.CPANEL_SSH_HOST }}:/home/${{ secrets.CPANEL_SSH_USER }}/public_html/
+            -C public . | ssh -p ${{ secrets.CPANEL_SSH_PORT || 22 }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.CPANEL_SSH_USER }}@${{ secrets.CPANEL_SSH_HOST }} "mkdir -p /home/${{ secrets.CPANEL_SSH_USER }}/public_html && tar -xzf - -C /home/${{ secrets.CPANEL_SSH_USER }}/public_html"
 
       # 3. Run migrations and clear/rebuild Laravel caches
       - name: Execute Post-Deployment Commands on cPanel
