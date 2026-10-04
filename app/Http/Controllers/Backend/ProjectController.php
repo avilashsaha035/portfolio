@@ -14,8 +14,23 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::get();
+        $projects = Project::get(); // global scope orders by sort_order
         return view('backend.project.index', compact('projects'));
+    }
+
+    /**
+     * Persist the new drag-and-drop sort order.
+     * Expects JSON body: { "ids": [3, 1, 2] }
+     */
+    public function reorder(Request $request)
+    {
+        $request->validate(['ids' => 'required|array', 'ids.*' => 'integer']);
+
+        foreach ($request->ids as $position => $id) {
+            Project::where('id', $id)->update(['sort_order' => $position]);
+        }
+
+        return response()->json(['status' => 'ok']);
     }
 
     /**

@@ -17,36 +17,39 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="projectsTable" class="table table-bordered table-striped">
+            <p class="text-muted small"><i class="fas fa-grip-vertical"></i> Drag rows to reorder projects.</p>
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th class="text-center">Title</th>
-                        <th class="text-center">Image</th>
-                        <th class="text-center">Live Link</th>
-                        <th class="text-center">Repo Link</th>
+                        <th style="width:40px"></th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Live Link</th>
+                        <th>Repo Link</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
-
-                <tbody>
+                <tbody id="sortable-projects">
                     @foreach($projects as $project)
-                        <tr>
-                            <td class="text-center">{{ $project->title }}</td>
-                            <td class="text-center">
+                        <tr data-id="{{ $project->id }}">
+                            <td class="text-center text-muted drag-handle" style="cursor:grab">
+                                <i class="fas fa-grip-vertical"></i>
+                            </td>
+                            <td>{{ $project->title }}</td>
+                            <td>
                                 <img src="{{ asset('storage/'.$project->image) }}" width="80" class="rounded">
                             </td>
-                            <td class="text-center">
-                                <a href="{{ $project->live_link }}" target="_blank" class="">{{ $project->live_link }}</a>
+                            <td>
+                                <a href="{{ $project->live_link }}" target="_blank">{{ $project->live_link }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ $project->repo_link }}" target="_blank">{{ $project->repo_link }}</a>
                             </td>
                             <td class="text-center">
-                                <a href="{{ $project->repo_link }}" target="_blank" class="">{{ $project->repo_link }}</a>
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-success mr-2"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-success btn-sm mr-2"><i class="fas fa-edit"></i> Edit</a>
                                 <form action="{{ route('admin.project.destroy', $project->id) }}" method="POST" class="d-inline delete-form">
                                     @csrf
                                     @method('DELETE')
-
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
                                 </form>
                             </td>
@@ -59,10 +62,31 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+
     <script>
+        // Drag-and-drop reordering
+        Sortable.create(document.getElementById('sortable-projects'), {
+            handle: '.drag-handle',
+            animation: 150,
+            onEnd: function () {
+                const ids = $('#sortable-projects tr').map(function () {
+                    return $(this).data('id');
+                }).get();
+
+                $.ajax({
+                    url: '{{ route('admin.project.reorder') }}',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    data: JSON.stringify({ ids })
+                });
+            }
+        });
+
+        // Delete confirmation
         $(document).on('submit', '.delete-form', function (e) {
             e.preventDefault();
-
             let form = this;
             Swal.fire({
                 title: 'Are you sure?',
@@ -74,27 +98,7 @@
                 confirmButtonText: 'Yes, delete it',
                 cancelButtonText: 'Cancel'
             }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        });
-    </script>
-
-    <!-- jquery Table init -->
-    <script>
-        $(document).ready(function () {
-            $('#projectsTable').DataTable({
-                pageLength: 10,
-                ordering: true,
-                responsive: true,
-                language: {
-                    emptyTable: "Nothing found",
-                    zeroRecords: "No matching projects found"
-                },
-                columnDefs: [
-                    { orderable: false, targets: [1, 2, 3, 4] }
-                ]
+                if (result.isConfirmed) form.submit();
             });
         });
     </script>

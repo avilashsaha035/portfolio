@@ -15,6 +15,13 @@ class Project extends Model
         'description',
         'image',
         'repo_link',
-        'live_link'
+        'live_link',
+        'sort_order',
     ];
+
+    /** Default ordering by drag-and-drop position. */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('ordered', fn ($query) => $query->orderBy('sort_order'));
+    }
 }

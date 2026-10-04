@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'update'  => 'admin.project.update',
         'destroy' => 'admin.project.destroy',
     ]);
+    Route::post('project/reorder', [ProjectController::class, 'reorder'])->name('admin.project.reorder');
 
     // Work Experience
     Route::resource('work-experience', WorkExperienceController::class)->except('show')->names([
