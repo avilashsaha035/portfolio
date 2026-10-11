@@ -243,7 +243,7 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">My Projects</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 <!-- Project 1: Analytics Dashboard -->
                 @foreach ($projects as $project)
                     <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
@@ -262,7 +262,7 @@
                         </div>
 
                         <div class="p-6">
-                            <p class="text-gray mb-4">{{ $project->description }}</p>
+                            <p class="text-gray mb-4 text-justify">{{ $project->description }}</p>
 
                             {{-- <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="bg-dark-light text-gray px-3 py-1 rounded-full text-sm border border-dark-lighter">React</span>
