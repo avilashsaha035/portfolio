@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\WorkExperienceController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\AdminDashboardController;
+use App\Http\Controllers\Backend\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'update'  => 'admin.work-experience.update',
         'destroy' => 'admin.work-experience.destroy',
     ]);
+
+    // Skills
+    Route::resource('skill', SkillController::class)->except('show')->names([
+        'index'   => 'admin.skill.index',
+        'create'  => 'admin.skill.create',
+        'store'   => 'admin.skill.store',
+        'edit'    => 'admin.skill.edit',
+        'update'  => 'admin.skill.update',
+        'destroy' => 'admin.skill.destroy',
+    ]);
+    Route::post('skill/reorder', [SkillController::class, 'reorder'])->name('admin.skill.reorder');
 });
 
 

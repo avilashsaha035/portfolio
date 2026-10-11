@@ -48,7 +48,7 @@
                             <i class="fa-solid fa-chess-king fa-lg text-white"></i>
                         </div>
                         <div>
-                            <div class="text-2xl font-bold text-white">5+</div>
+                            <div class="text-2xl font-bold text-white">3+</div>
                             <div class="text-gray text-sm">Years Experience</div>
                         </div>
                     </div>
@@ -305,96 +305,50 @@
                 <!-- Technical Skills -->
                 <div class="fade-in">
                     <h3 class="text-2xl font-bold mb-8 text-white">Technical Skills</h3>
-
-                    @php
-                        $skills = [
-                            ['name' => 'HTML',        'color' => '#E34F26', 'bg' => 'rgba(227,79,38,0.12)',   'border' => 'rgba(227,79,38,0.3)'],
-                            ['name' => 'CSS',         'color' => '#1572B6', 'bg' => 'rgba(21,114,182,0.12)',  'border' => 'rgba(21,114,182,0.3)'],
-                            ['name' => 'Bootstrap',   'color' => '#7952B3', 'bg' => 'rgba(121,82,179,0.12)', 'border' => 'rgba(121,82,179,0.3)'],
-                            ['name' => 'Tailwind',    'color' => '#38BDF8', 'bg' => 'rgba(56,189,248,0.12)',  'border' => 'rgba(56,189,248,0.3)'],
-                            ['name' => 'JavaScript',  'color' => '#F7DF1E', 'bg' => 'rgba(247,223,30,0.12)',  'border' => 'rgba(247,223,30,0.3)'],
-                            ['name' => 'jQuery',      'color' => '#0769AD', 'bg' => 'rgba(7,105,173,0.12)',   'border' => 'rgba(7,105,173,0.3)'],
-                            ['name' => 'Vue.js',      'color' => '#42B883', 'bg' => 'rgba(66,184,131,0.12)',  'border' => 'rgba(66,184,131,0.3)'],
-                            ['name' => 'Node.js',     'color' => '#8CC84B', 'bg' => 'rgba(140,200,75,0.12)',  'border' => 'rgba(140,200,75,0.3)'],
-                            ['name' => 'Express.js',  'color' => '#AAAAAA', 'bg' => 'rgba(170,170,170,0.12)', 'border' => 'rgba(170,170,170,0.3)'],
-                            ['name' => 'PHP',         'color' => '#777BB4', 'bg' => 'rgba(119,123,180,0.12)', 'border' => 'rgba(119,123,180,0.3)'],
-                            ['name' => 'Laravel',     'color' => '#FF2D20', 'bg' => 'rgba(255,45,32,0.12)',   'border' => 'rgba(255,45,32,0.3)'],
-                            ['name' => 'MySQL',       'color' => '#00758F', 'bg' => 'rgba(0,117,143,0.12)',   'border' => 'rgba(0,117,143,0.3)'],
-                            ['name' => 'Python',      'color' => '#3776AB', 'bg' => 'rgba(55,118,171,0.12)',  'border' => 'rgba(55,118,171,0.3)'],
-                        ];
-                    @endphp
-
                     <div class="flex flex-wrap gap-3">
-                        @foreach ($skills as $skill)
-                            <div
-                                class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default"
-                                style="
-                                    color: {{ $skill['color'] }};
-                                    background-color: {{ $skill['bg'] }};
-                                    border: 1px solid {{ $skill['border'] }};
-                                "
-                            >
-                                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color: {{ $skill['color'] }};"></span>
-                                {{ $skill['name'] }}
+                        @foreach($skills->get('technical', collect()) as $skill)
+                            @php
+                                $hex = $skill->color;
+                                // derive bg and border from hex with opacity
+                                $r = hexdec(substr($hex,1,2));
+                                $g = hexdec(substr($hex,3,2));
+                                $b = hexdec(substr($hex,5,2));
+                            @endphp
+                            <div class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default"
+                                style="color:{{ $hex }};background-color:rgba({{ $r }},{{ $g }},{{ $b }},0.12);border:1px solid rgba({{ $r }},{{ $g }},{{ $b }},0.3);">
+                                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color:{{ $hex }};"></span>
+                                {{ $skill->name }}
                             </div>
                         @endforeach
                     </div>
                 </div>
 
-                <!-- Tools & Technologies -->
+                <!-- Tools & Soft Skills -->
                 <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-8 text-white">Tools & Technologies</h3>
+                    @if($skills->has('tool'))
+                        <h3 class="text-2xl font-bold mb-8 text-white">Tools &amp; Technologies</h3>
+                        <div class="flex flex-wrap gap-4">
+                            @foreach($skills->get('tool') as $skill)
+                                <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
+                                    <span class="text-gray">{{ $skill->name }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
 
-                    <div class="flex flex-wrap gap-4">
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fab fa-docker text-primary text-xl mr-2"></i>
-                            <span class="text-gray">Docker</span>
+                    @if($skills->has('soft'))
+                        <h3 class="text-2xl font-bold mt-12 mb-6 text-white">Soft Skills</h3>
+                        <div class="flex flex-wrap gap-3">
+                            @foreach($skills->get('soft') as $skill)
+                                <span class="bg-primary/20 text-primary px-4 py-2 rounded-full border border-primary/30">{{ $skill->name }}</span>
+                            @endforeach
                         </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fab fa-git-alt text-primary text-xl mr-2"></i>
-                            <span class="text-gray">Git</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fab fa-aws text-primary text-xl mr-2"></i>
-                            <span class="text-gray">AWS</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fas fa-database text-primary text-xl mr-2"></i>
-                            <span class="text-gray">MongoDB</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fas fa-server text-primary text-xl mr-2"></i>
-                            <span class="text-gray">PostgreSQL</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fab fa-figma text-primary text-xl mr-2"></i>
-                            <span class="text-gray">Figma</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fas fa-terminal text-primary text-xl mr-2"></i>
-                            <span class="text-gray">VS Code</span>
-                        </div>
-                        <div class="bg-dark-light px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 border border-dark-lighter">
-                            <i class="fas fa-code-branch text-primary text-xl mr-2"></i>
-                            <span class="text-gray">Jira</span>
-                        </div>
-                    </div>
-
-                    <!-- Soft Skills -->
-                    <h3 class="text-2xl font-bold mt-12 mb-6 text-white">Soft Skills</h3>
-
-                    <div class="flex flex-wrap gap-3">
-                        <span class="bg-primary/20 text-primary px-4 py-2 rounded-full border border-primary/30">Communication</span>
-                        <span class="bg-primary/20 text-primary px-4 py-2 rounded-full border border-primary/30">Problem Solving</span>
-                        <span class="bg-secondary/20 text-secondary px-4 py-2 rounded-full border border-secondary/30">Team Leadership</span>
-                        <span class="bg-accent/20 text-accent px-4 py-2 rounded-full border border-accent/30">Time Management</span>
-                        <span class="bg-primary/20 text-primary px-4 py-2 rounded-full border border-primary/30">Adaptability</span>
-                        <span class="bg-secondary/20 text-secondary px-4 py-2 rounded-full border border-secondary/30">Mentoring</span>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-dark-light">
