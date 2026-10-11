@@ -243,10 +243,10 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">My Projects</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            <div class="flex flex-wrap justify-center gap-8">
                 <!-- Project 1: Analytics Dashboard -->
                 @foreach ($projects as $project)
-                    <div class="bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
+                    <div class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-dark rounded-2xl shadow-xl overflow-hidden card-hover fade-in border border-dark-lighter">
                         <div class="h-48 relative overflow-hidden">
                             <!-- Image overlay for better text readability -->
                             <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent z-10"></div>
