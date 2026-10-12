@@ -431,94 +431,156 @@
             <div class="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-secondary/20 animate-float" style="animation-delay: 0.8s;"></div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl md:text-4xl font-bold text-white section-title fade-in">Get In Touch</h2>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="fade-in mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white section-title">Get In Touch</h2>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6">
+                    <p class="text-gray text-base sm:text-lg max-w-2xl leading-relaxed">
+                        I'm currently open to new opportunities, collaborations, and interesting projects.
+                        Whether you have a question, a project idea, or just want to say hi, feel free to reach out directly.
+                    </p>
+                    <div class="flex-shrink-0">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-secondary/10 text-secondary border border-secondary/30 shadow-lg shadow-secondary/5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+                            Available for Opportunities
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-dark-light rounded-3xl shadow-2xl overflow-hidden border border-dark-lighter">
-                    <div class="md:flex">
-                        <div class="md:w-1/2 bg-gradient-to-br from-primary/20 to-secondary/20 p-8 md:p-12 text-white border-r border-dark-lighter">
-                            <h3 class="text-2xl font-bold mb-6">Let's work together!</h3>
-                            <p class="text-gray mb-8">I'm currently open to new opportunities and interesting projects. Whether you have a question or just want to say hi, feel free to reach out.</p>
-
-                            <div class="space-y-6">
-                                <div class="flex items-center">
-                                    <div class="bg-primary/20 p-3 rounded-full mr-4 border border-primary/30">
-                                        <i class="fas fa-envelope text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold text-white">Email</div>
-                                        <div class="text-gray">sahaavilash5055@gmail.com</div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <div class="bg-primary/20 p-3 rounded-full mr-4 border border-primary/30">
-                                        <i class="fas fa-phone text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold text-white">Phone</div>
-                                        <div class="text-gray">+880-1777-020313</div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <div class="bg-primary/20 p-3 rounded-full mr-4 border border-primary/30">
-                                        <i class="fas fa-map-marker-alt text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold text-white">Location</div>
-                                        <div class="text-gray">Dhaka, Bangladesh</div>
-                                    </div>
-                                </div>
+            <!-- Primary Contact Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <!-- Email Card -->
+                <div class="bg-dark-light rounded-2xl p-6 sm:p-7 border border-dark-lighter hover:border-primary/50 transition-all duration-300 card-hover flex flex-col justify-between group shadow-xl relative overflow-hidden fade-in">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/15 transition-all duration-300 pointer-events-none"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/15 text-primary flex items-center justify-center border border-primary/30 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                                <i class="fas fa-envelope text-xl"></i>
                             </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">Preferred</span>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider font-semibold text-gray block mb-1">Email Address</span>
+                        <a href="mailto:sahaavilash5055@gmail.com" class="text-lg sm:text-xl font-bold text-white hover:text-primary transition-colors duration-200 block break-all mb-2">
+                            sahaavilash5055@gmail.com
+                        </a>
+                        <p class="text-gray text-sm leading-relaxed mb-6">
+                            Drop a line anytime. Expect a swift response within 24 hours.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-dark-lighter flex items-center justify-between gap-3">
+                        <a href="mailto:sahaavilash5055@gmail.com" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-white transition-colors duration-200">
+                            <span>Write Email</span>
+                            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <button type="button" class="copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark text-gray hover:text-white hover:border-primary/40 border border-dark-lighter text-xs font-medium transition-all duration-200" data-copy="sahaavilash5055@gmail.com" title="Copy email address">
+                            <i class="far fa-copy text-xs"></i>
+                            <span>Copy</span>
+                        </button>
+                    </div>
+                </div>
 
-                            <div class="mt-10 flex space-x-4">
-                                @if (!empty($social['linkedin']))
-                                    <a href="{{ $social['linkedin'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                @endif
-                                @if (!empty($social['github']))
-                                    <a href="{{ $social['github'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                @endif
-                                @if (!empty($social['twitter']))
-                                    <a href="{{ $social['twitter'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                @endif
-                                @if (!empty($social['facebook']))
-                                    <a href="{{ $social['facebook'] }}" class="bg-dark text-primary p-3 rounded-full hover:bg-primary/10 transition-colors duration-300 border border-dark-lighter">
-                                        <i class="fa-brands fa-facebook"></i>
-                                    </a>
-                                @endif
+                <!-- Location Card -->
+                <div class="bg-dark-light rounded-2xl p-6 sm:p-7 border border-dark-lighter hover:border-accent/50 transition-all duration-300 card-hover flex flex-col justify-between group shadow-xl relative overflow-hidden fade-in" style="transition-delay: 0.1s;">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/15 transition-all duration-300 pointer-events-none"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-accent/15 text-accent flex items-center justify-center border border-accent/30 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
                             </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">Remote Ready</span>
                         </div>
-
-                        <div class="md:w-1/2 p-8 md:p-12">
-                            <form id="contact-form">
-                                <div class="mb-6">
-                                    <label class="block text-white font-medium mb-2" for="name">Name</label>
-                                    <input type="text" id="name" class="w-full px-4 py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Your name">
-                                </div>
-
-                                <div class="mb-6">
-                                    <label class="block text-white font-medium mb-2" for="email">Email</label>
-                                    <input type="email" id="email" class="w-full px-4 py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Your email">
-                                </div>
-
-                                <div class="mb-6">
-                                    <label class="block text-white font-medium mb-2" for="message">Message</label>
-                                    <textarea id="message" rows="5" class="w-full px-4 py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Your message"></textarea>
-                                </div>
-
-                                <button type="submit" class="bg-gradient text-white w-full py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center">
-                                    <i class="fas fa-paper-plane mr-2"></i> Send Message
-                                </button>
-                            </form>
+                        <span class="text-xs uppercase tracking-wider font-semibold text-gray block mb-1">Current Base</span>
+                        <div class="text-lg sm:text-xl font-bold text-white mb-2">
+                            Dhaka, Bangladesh
                         </div>
+                        <p class="text-gray text-sm leading-relaxed mb-6">
+                            Timezone: GMT+6 (Bangladesh Standard Time). Flexible working hours across timezones.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-dark-lighter flex items-center justify-between text-xs text-gray">
+                        <span class="inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-globe text-accent"></i> Worldwide Remote
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-gray">
+                            <i class="fa-regular fa-clock text-accent"></i> GMT+6 Timezone
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connect & Social Profiles Banner -->
+            <div class="bg-dark-light rounded-3xl p-8 sm:p-10 border border-dark-lighter shadow-2xl relative overflow-hidden fade-in">
+                <!-- Background ambient highlight -->
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+                    <!-- Left: Connect info & social buttons -->
+                    <div class="w-full lg:w-2/3 text-center lg:text-left">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">
+                            Connect Across the Web
+                        </h3>
+                        <p class="text-gray text-sm sm:text-base mb-6 max-w-xl">
+                            Follow my latest open-source repositories, engineering thoughts, and professional updates across these platforms.
+                        </p>
+
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+                            @if (!empty($social['github']))
+                                <a href="{{ $social['github'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-dark text-gray hover:text-white border border-dark-lighter hover:border-primary/40 hover:bg-dark-light transition-all duration-300 group shadow-md">
+                                    <i class="fab fa-github text-lg text-primary group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm font-medium">GitHub</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                                </a>
+                            @endif
+
+                            @if (!empty($social['linkedin']))
+                                <a href="{{ $social['linkedin'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-dark text-gray hover:text-white border border-dark-lighter hover:border-primary/40 hover:bg-dark-light transition-all duration-300 group shadow-md">
+                                    <i class="fab fa-linkedin-in text-lg text-primary group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm font-medium">LinkedIn</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                                </a>
+                            @endif
+
+                            @if (!empty($social['facebook']))
+                                <a href="{{ $social['facebook'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-dark text-gray hover:text-white border border-dark-lighter hover:border-primary/40 hover:bg-dark-light transition-all duration-300 group shadow-md">
+                                    <i class="fab fa-facebook text-lg text-primary group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm font-medium">Facebook</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                                </a>
+                            @endif
+
+                            @if (!empty($social['twitter']))
+                                <a href="{{ $social['twitter'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-dark text-gray hover:text-white border border-dark-lighter hover:border-primary/40 hover:bg-dark-light transition-all duration-300 group shadow-md">
+                                    <i class="fab fa-twitter text-lg text-primary group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm font-medium">Twitter / X</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                                </a>
+                            @endif
+
+                            @if (!empty($social['instagram']))
+                                <a href="{{ $social['instagram'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-dark text-gray hover:text-white border border-dark-lighter hover:border-primary/40 hover:bg-dark-light transition-all duration-300 group shadow-md">
+                                    <i class="fab fa-instagram text-lg text-primary group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm font-medium">Instagram</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-opacity"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Right: Direct CTA action buttons -->
+                    <div class="w-full lg:w-1/3 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center items-stretch lg:items-end">
+                        <a href="mailto:sahaavilash5055@gmail.com" class="bg-gradient text-white px-7 py-3.5 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 text-center inline-flex items-center justify-center gap-2.5">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Send an Email</span>
+                        </a>
+
+                        @if(!empty($aboutMe->cv_link))
+                            <a href="{{ $aboutMe->cv_link }}" target="_blank" rel="noopener noreferrer" class="border-gradient text-white px-7 py-3.5 rounded-full font-semibold hover:bg-dark transition-all duration-300 text-center inline-flex items-center justify-center gap-2.5">
+                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                <span>Download CV</span>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

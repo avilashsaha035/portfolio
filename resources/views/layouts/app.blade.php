@@ -77,7 +77,7 @@
         @include('frontend.includes.footer')
 
         <!-- Back to Top Button -->
-        <button id="back-to-top" class="fixed bottom-8 right-8 bg-gradient text-white p-3 rounded-full shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 opacity-0 translate-y-10">
+        <button id="back-to-top" class="fixed bottom-8 right-8 z-50 w-12 h-12 flex items-center justify-center bg-gradient text-white rounded-full shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 opacity-0 translate-y-10" aria-label="Back to top">
             <i class="fas fa-arrow-up"></i>
         </button>
 

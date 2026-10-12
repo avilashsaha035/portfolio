@@ -101,30 +101,45 @@ $(document).ready(function() {
         animateOnScroll();
     });
 
-    // Form submission
-    $('#contact-form').submit(function(e) {
+    // Copy to clipboard for contact details
+    $('.copy-btn').click(function(e) {
         e.preventDefault();
+        const text = $(this).data('copy');
+        if (!text) return;
 
-        // Simple form validation
-        const name = $('#name').val();
-        const email = $('#email').val();
-        const message = $('#message').val();
+        const $btn = $(this);
+        const originalHtml = $btn.html();
 
-        if (name && email && message) {
-            // In a real application, you would send this data to your Laravel backend
-            $('button[type="submit"]').html('<i class="fas fa-check mr-2"></i> Message Sent!');
-            $('button[type="submit"]').addClass('bg-secondary');
+        function showSuccess() {
+            $btn.html('<i class="fas fa-check text-secondary"></i> <span class="text-secondary font-medium">Copied!</span>');
+            setTimeout(function() {
+                $btn.html(originalHtml);
+            }, 2000);
+        }
 
-            setTimeout(() => {
-                $('button[type="submit"]').html('<i class="fas fa-paper-plane mr-2"></i> Send Message');
-                $('button[type="submit"]').removeClass('bg-secondary');
-            }, 3000);
-
-            $('#contact-form')[0].reset();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                showSuccess();
+            }).catch(function() {
+                fallbackCopy(text, showSuccess);
+            });
         } else {
-            alert('Please fill in all fields.');
+            fallbackCopy(text, showSuccess);
         }
     });
+
+    function fallbackCopy(text, onSuccess) {
+        const temp = $('<input>');
+        $('body').append(temp);
+        temp.val(text).select();
+        try {
+            document.execCommand('copy');
+            if (typeof onSuccess === 'function') onSuccess();
+        } catch (err) {
+            console.error('Fallback copy failed', err);
+        }
+        temp.remove();
+    }
 
     // Trigger initial animations
     setTimeout(() => {
